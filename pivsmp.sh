@@ -1,12 +1,10 @@
 #!/bin/bash
-source ./slowmovie/config/settings.cfg
 
 SCRIPT=$( basename "$0" )
 VERSION="1.0.0"
 PIVSMP_SOURCE_PATH="./src"
 PIVSMP_SCRIPT_PATH="./mock.sh"
 PIVSMP_SCRIPT_PROCESS_NAME="mock.sh"
-SLOWMOVIE_MOVIES_PATH="slowmovie/movies/"
 
 function usage
 {
@@ -61,91 +59,22 @@ function app-status
     local SPI_STATUS="Disabled"
   fi
 
-  local PROGRESS_PERCENTAGE=$(( 100*10#$FRAME/10#$TOTAL_FRAMES ))
-  local TIME_REMAINING_SECONDS=$(( (10#$TOTAL_FRAMES-10#$FRAME)*10#$DELAY ))
-  local FORMATTED_TIME_REMAINING=$()
-  local FORMATTED_END_DATE=$(date -d "+$TIME_REMAINING_SECONDS seconds")
-
   local txt=(
     "PiVSMP (Pi Very Slow Movie Player)"
     "Version: $VERSION"
     "-----------------------------"
     "Movie Status: $MOVIE_STATUS"
-    "E-Ink Display: $DISPLAY_WIDTH * $DISPLAY_HEIGHT"
     "Raspberry Pi SPI: $SPI_STATUS"
-    "-----------------------------"
-    "Movie: $MOVIE"
-    "Delay: $DELAY seconds"
-    "-----------------------------"
-    "Progress: $PROGRESS_PERCENTAGE%"
-    "Current Frame: $FRAME"
-    "Total Frames: $TOTAL_FRAMES"
-    "Time Remaining: $TIME_REMAINING_SECONDS seconds ($FORMATTED_END_DATE)"
     "-----------------------------"
   )
 
   printf "%s\n" "${txt[@]}"
-}
-
-function choose-movie
-{
-  unset options i
-  while IFS= read -r -d $'\0' f; do
-    local MOVIE_NAME="${f/$SLOWMOVIE_MOVIES_PATH/''}"
-    if [ ! -z "$MOVIE_NAME" ]
-    then
-      options[i++]="$MOVIE_NAME"
-    fi
-  done < <(find $SLOWMOVIE_MOVIES_PATH -type d -print0 )
-
-  select opt in "${options[@]}"; do
-    case $opt in
-      "")
-        echo "Please select a movie from the list"
-      ;;
-      *)
-        CONFIGURE_MOVIE=$opt
-        break
-      ;;
-    esac
-  done
-}
-
-function choose-delay
-{
-  while :; do
-    read -p "Delay (in seconds): " CONFIGURE_DELAY
-    if ! [[ $CONFIGURE_DELAY =~ ^[0-9]+$ ]]
-    then
-      echo "Please enter a number"
-      continue
-    fi
-
-    if (($CONFIGURE_DELAY >= 120))
-    then
-      break
-    else
-      echo "Please enter a number of at least 120 seconds"
-    fi
-  done
+  python $PIVSMP_SOURCE_PATH/status.py
 }
 
 function app-configure
 {
   python $PIVSMP_SOURCE_PATH/configure.py
-  # echo "Choose a movie to show:"
-  # choose-movie
-  # echo "-----------------------------"
-  # echo "How long do you want to wait between frames? (in seconds):"
-  # choose-delay
-
-  # local txt=(
-  #   "Please confirm these new configurations"
-  #   "Movie: $CONFIGURE_MOVIE"
-  #   "Delay: $CONFIGURE_DELAY seconds"
-  # )
-
-  # printf "%s\n" "${txt[@]}"
 }
 
 function app-start
@@ -156,9 +85,9 @@ function app-start
 
   if [ -z "$PIVSMP_PID" ]
   then
-    echo "Error: Unable to start Slow Movie"
+    echo "Error: Unable to start movie"
   else
-    echo "Slow Movie: Started"
+    echo "Movie: Started"
     exit 1
   fi
 }
@@ -170,9 +99,9 @@ function app-stop
 
   if [ -z "$PIVSMP_PID" ]
   then
-    echo "Slow Movie: Stopped"
+    echo "Movie: Stopped"
   else
-    echo "Error: Unable to stop Slow Movie"
+    echo "Error: Unable to stop movie"
     exit 1
   fi
 }

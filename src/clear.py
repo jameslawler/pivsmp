@@ -1,12 +1,28 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
-from waveshare_epd import epd7in5_V2 as epd_driver
+#
+# Clear Module
+#
+# Clears the e-paper display
+#
 
-epd = epd_driver.EPD()
-epd.init()
-epd.Clear()
-epd.sleep()  
-epd_driver.epdconfig.module_exit()
+import sys
+import display
 
-exit()
+def clearDisplay():
+  epd = display.displayModule.EPD()
+  epd.init()
+  epd.Clear()
+  epd.sleep()
+
+# Main function
+# First argument is the e-paper display to use
+# Default is epd7in5_V2
+
+args = sys.argv
+
+if len(args) > 1:
+  display.changeDisplay(display)
+
+clearDisplay()
