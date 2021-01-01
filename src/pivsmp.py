@@ -35,7 +35,7 @@ while 1:
 
   # Wait for delay until next frame is shown
   display.sleep()
-  time.sleep(delay)
+  time.sleep(float(delay))
   display.init()
 
 display.shutdown()
