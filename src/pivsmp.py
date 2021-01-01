@@ -30,7 +30,7 @@ while 1:
   print("Displaying image " + str(position).zfill(4))
 
   display.showImage(image)
-  position = int(position) + 1
+  position = str(int(position) + 1)
   config.setPositionConfig(position)
 
   # Wait for delay until next frame is shown
