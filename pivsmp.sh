@@ -3,8 +3,8 @@
 SCRIPT=$( basename "$0" )
 VERSION="1.0.0"
 PIVSMP_SOURCE_PATH="./src"
-PIVSMP_SCRIPT_PATH="./mock.sh"
-PIVSMP_SCRIPT_PROCESS_NAME="mock.sh"
+PIVSMP_SCRIPT_CMD="python ./src/pivsmp.py"
+PIVSMP_SCRIPT_PROCESS_NAME="./src/pivsmp.py"
 
 function usage
 {
@@ -79,7 +79,7 @@ function app-configure
 
 function app-start
 {
-  $PIVSMP_SCRIPT_PATH > /dev/null &
+  $PIVSMP_SCRIPT_CMD > /dev/null &
 
   local PIVSMP_PID=$(pgrep -f $PIVSMP_SCRIPT_PROCESS_NAME)
 
