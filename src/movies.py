@@ -9,7 +9,7 @@
 
 import os
 
-MOVIES_PATH = "./movies/"
+MOVIES_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'movies/')
 
 def listMovies():
   if (not os.path.exists(MOVIES_PATH)):
