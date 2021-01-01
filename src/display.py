@@ -52,7 +52,7 @@ def init():
   epd.init()
 
 def clear():
-  epd.clear()
+  epd.Clear()
 
 def sleep():
   epd.sleep()
