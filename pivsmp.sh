@@ -79,7 +79,7 @@ function app-configure
 
 function app-start
 {
-  $PIVSMP_SCRIPT_CMD > /dev/null &
+  nohup $PIVSMP_SCRIPT_CMD > /dev/null &
 
   local PIVSMP_PID=$(pgrep -f $PIVSMP_SCRIPT_PROCESS_NAME)
 
@@ -175,5 +175,3 @@ done
 
 usage
 exit 0
-
-# nohup ./mock.sh > logs.txt 2>&1 &
