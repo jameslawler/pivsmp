@@ -6,10 +6,10 @@ DEFAULT_MOVIE = None
 DEFAULT_DELAY = "120"
 DEFAULT_POSITION = "1"
 
-def loadConfig():
-  configDirectory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config/')
-  configFilePath = configDirectory + 'pivsmp.ini'
+configDirectory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config/')
+configFilePath = configDirectory + 'pivsmp.ini'
 
+def loadConfig():
   if (os.path.exists(configFilePath)):
     config = configparser.ConfigParser()
     config.read(configFilePath)
