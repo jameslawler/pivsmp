@@ -158,6 +158,7 @@ do
     | start         \
     | stop          \
     | restart       \
+    | test          \
     | clear )
       command=$1
       shift
