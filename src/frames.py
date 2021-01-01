@@ -5,7 +5,7 @@ import movies
 def getFrameImage(movie, position):
   moviePath = movies.getMoviePath(movie)
 
-  imageFilePath = moviePath + str(currentPosition).zfill(4) + ".png"
+  imageFilePath = moviePath + str(position).zfill(4) + ".png"
 
   if not os.path.exists(imageFilePath):
     return None

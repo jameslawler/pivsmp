@@ -27,11 +27,11 @@ while 1:
     display.shutdown()
     exit(1)
 
-  print("Displaying image " + str(currentPosition).zfill(4))
+  print("Displaying image " + str(position).zfill(4))
 
   display.showImage(image)
-  currentPosition = currentPosition + 1
-  config.setPositionConfig(currentPosition)
+  position = position + 1
+  config.setPositionConfig(position)
 
   # Wait for delay until next frame is shown
   display.sleep()
