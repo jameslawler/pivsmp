@@ -1,3 +1,12 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+#
+# Frames Module
+#
+# Loads a frame from the movie and returns the image to be displayed
+#
+
 import os
 from PIL import Image
 

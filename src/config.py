@@ -1,18 +1,28 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+#
+# Config Module
+#
+# Get and Write configuration settings to file
+#
+
 import os
 import configparser
+
+import constants
 
 DEFAULT_DISPLAY = "epd7in5_V2"
 DEFAULT_MOVIE = None
 DEFAULT_DELAY = "120"
 DEFAULT_POSITION = "1"
 
-configDirectory = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'config/')
-configFilePath = configDirectory + 'pivsmp.ini'
+CONFIG_FILE_PATH = os.path.join(constants.CONFIG_FOLDER_PATH, 'pivsmp.ini')
 
 def loadConfig():
-  if (os.path.exists(configFilePath)):
+  if (os.path.exists(CONFIG_FILE_PATH)):
     config = configparser.ConfigParser()
-    config.read(configFilePath)
+    config.read(CONFIG_FILE_PATH)
     return config
   else:
     return None
@@ -56,7 +66,7 @@ def setConfig(display, movie, position, delay):
   config['pivsmp']['position'] = position
   config['pivsmp']['delay'] = delay
 
-  with open(configFilePath, 'w') as configFile:
+  with open(CONFIG_FILE_PATH, 'w') as configFile:
     config.write(configFile)
 
 def setPositionConfig(position):
@@ -68,5 +78,5 @@ def setPositionConfig(position):
   
   config['pivsmp']['position'] = position
 
-  with open(configFilePath, 'w') as configFile:
+  with open(CONFIG_FILE_PATH, 'w') as configFile:
     config.write(configFile)

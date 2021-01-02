@@ -1,1 +1,9 @@
+# Python
 src/__pycache__
+/**/*.pyc
+
+# Waveshare
+waveshare-driver/build
+waveshare-driver/dist
+waveshare-driver/build/
+waveshare-driver/lib/waveshare_epd.egg-info

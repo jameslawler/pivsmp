@@ -1,11 +1,21 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+#
+# Configure Module
+#
+# Interactive utility to configure pivsmp
+#
+ 
 import questionary
 
 import config
+import constants
 import display
 import movies
 
 if (not movies.hasMovies()):
-  print("No movies found. Please add to the movies directory (" + movies.MOVIES_PATH + ")")
+  print("No movies found. Please add to the movies directory (" + constants.MOVIES_FOLDER_PATH + ")")
   exit(1)
 
 defaultMovie = config.getMovieConfig()

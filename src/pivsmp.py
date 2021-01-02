@@ -1,6 +1,12 @@
 #!/usr/bin/python
 # -*- coding:utf-8 -*-
 
+#
+# PiVSMP Module
+#
+# Core program with frame loop
+#
+
 import time
 
 import display

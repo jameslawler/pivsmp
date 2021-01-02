@@ -9,14 +9,15 @@
 
 import os
 
-MOVIES_PATH = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'movies/')
+import constants
 
 def listMovies():
-  if (not os.path.exists(MOVIES_PATH)):
+  if (not os.path.exists(constants.MOVIES_FOLDER_PATH)):
+    print("Movies folder does not exist")
     return []
 
-  filesAndFolders = os.listdir(MOVIES_PATH)
-  return [ name for name in filesAndFolders if os.path.isdir(MOVIES_PATH + name) ]
+  filesAndFolders = os.listdir(constants.MOVIES_FOLDER_PATH)
+  return [ name for name in filesAndFolders if os.path.isdir(os.path.join(constants.MOVIES_FOLDER_PATH, name)) ]
 
 def hasMovies():
   movies = listMovies()
@@ -27,4 +28,4 @@ def checkMovieExists(movie):
   return movie in movies
 
 def getMoviePath(movie):
-  return MOVIES_PATH + movie
+  return os.path.join(constants.MOVIES_FOLDER_PATH, movie)

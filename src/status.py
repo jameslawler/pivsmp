@@ -1,3 +1,12 @@
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+#
+# Status Module
+#
+# Displays program status with config and e-paper values
+#
+
 import config
 import display
 
