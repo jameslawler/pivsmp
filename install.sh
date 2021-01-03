@@ -121,4 +121,4 @@ function main
 # 
 # Explain the `pivsmp` command
 
-main
+main "$@"
