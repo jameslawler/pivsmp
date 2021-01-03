@@ -17,13 +17,14 @@ function system-packages-upgrade
 function install-git
 {
   echo "(starting)    sudo apt-get install git"
-  #sudo apt-get install -y git
+  sudo apt-get install -y git
   echo "(complete)    sudo apt-get install git"
 }
 
 function clone-installation-repository
 {
   echo "(starting)    cloning pivsmp repository"
+  sudo rm -r /tmp/pivsmp
   sudo git clone https://github.com/jameslawler/pivsmp.git /tmp/pivsmp
   echo "(complete)    cloning pivsmp repository"
 }
@@ -31,23 +32,23 @@ function clone-installation-repository
 function python-packages
 {
   echo "(starting)    sudo apt-get install python3-pip python3-pil python3-numpy"
-  #sudo apt-get install -y python3-pip python3-pil python3-numpy
+  sudo apt-get install -y python3-pip python3-pil python3-numpy
   echo "(complete)    sudo apt-get install python3-pip python3-pil python3-numpy"
 
   echo "(starting)    sudo pip3 install --no-cache-dir RPi.GPIO"
-  #sudo pip3 install --no-cache-dir RPi.GPIO
+  sudo pip3 install --no-cache-dir RPi.GPIO
   echo "(complete)    sudo pip3 install --no-cache-dir RPi.GPIO"
 
   echo "(starting)    sudo pip3 install --no-cache-dir spidev"
-  #sudo pip3 install --no-cache-dir spidev
+  sudo pip3 install --no-cache-dir spidev
   echo "(complete)    sudo pip3 install --no-cache-dir spidev"
 }
 
 function waveshare-driver
 {
   echo "(starting)    installing waveshare driver"
-  #cd /tmp/pivsmp/waveshare-driver
-  #sudo python3 setup.py install
+  cd /tmp/pivsmp/waveshare-driver
+  sudo python3 setup.py install
   echo "(complete)    installing waveshare driver"
 }
 
@@ -64,9 +65,9 @@ function install-pivsmp-program
 function create-folders
 {
   echo "(starting)    creating folders (~/.pivsmp)"
-  #mkdir -p ~/.pivsmp
-  #mkdir -p ~/.pivsmp/config
-  #mkdir -p ~/.pivsmp/movies
+  mkdir -p ~/.pivsmp
+  mkdir -p ~/.pivsmp/config
+  mkdir -p ~/.pivsmp/movies
   echo "(complete)    creating folders (~/.pivsmp)"
 }
 
