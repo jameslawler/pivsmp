@@ -42,6 +42,10 @@ function python-packages
   echo "(starting)    sudo pip3 install --no-cache-dir spidev"
   sudo pip3 install --no-cache-dir spidev
   echo "(complete)    sudo pip3 install --no-cache-dir spidev"
+
+  echo "(starting)    sudo pip3 install --no-cache-dir questionary"
+  sudo pip3 install --no-cache-dir questionary
+  echo "(complete)    sudo pip3 install --no-cache-dir questionary"
 }
 
 function waveshare-driver

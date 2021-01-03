@@ -68,17 +68,17 @@ function app-status
   )
 
   printf "%s\n" "${txt[@]}"
-  python $PIVSMP_PROGRAM_PATH/status.py
+  python3 $PIVSMP_PROGRAM_PATH/status.py
 }
 
 function app-configure
 {
-  python $PIVSMP_PROGRAM_PATH/configure.py
+  python3 $PIVSMP_PROGRAM_PATH/configure.py
 }
 
 function app-start
 {
-  nohup python $PIVSMP_PROGRAM_PATH/$PIVSMP_PROCESS_NAME > /dev/null &
+  nohup python3 $PIVSMP_PROGRAM_PATH/$PIVSMP_PROCESS_NAME > /dev/null &
 
   local PIVSMP_PID=$(pgrep -f $PIVSMP_PROCESS_NAME)
 
@@ -114,14 +114,14 @@ function app-restart
 function app-clear
 {
   app-stop
-  python $PIVSMP_PROGRAM_PATH/clear.py
+  python3 $PIVSMP_PROGRAM_PATH/clear.py
   echo "Display cleared"
 }
 
 function app-test
 {
   app-stop
-  python $PIVSMP_PROGRAM_PATH/test.py
+  python3 $PIVSMP_PROGRAM_PATH/test.py
   echo "Check your display to see if there is a test message"
 }
 
