@@ -75,45 +75,50 @@ function create-folders
   echo "(complete)    creating folders (~/.pivsmp)"
 }
 
-while true; do
-  read -p "Do you wish to install Pi VSMP (Very Slow Movie Player)? [y/n]: " yn
-  case $yn in
-    [Yy]* )
-      system-packages-update
-      break
-    ;;
-    [Nn]* )
-      exit
-    ;;
-    * )
-      echo "Please answer yes or no."
-    ;;
-  esac
-done
+function main
+{
+  while true; do
+    read -p "Do you wish to install Pi VSMP (Very Slow Movie Player)? [y/n]: " yn
+    case $yn in
+      [Yy]* )
+        system-packages-update
+        break
+      ;;
+      [Nn]* )
+        exit
+      ;;
+      * )
+        echo "Please answer yes or no."
+      ;;
+    esac
+  done
 
-while true; do
-  read -p "It is recommended to do a system update before installing. Would you like to? [y/n]: " yn
-  case $yn in
-    [Yy]* )
-      system-packages-upgrade
-      break
-    ;;
-    [Nn]* )
-      break
-    ;;
-    * )
-      echo "Please answer yes or no."
-    ;;
-  esac
-done
+  while true; do
+    read -p "It is recommended to do a system update before installing. Would you like to? [y/n]: " yn
+    case $yn in
+      [Yy]* )
+        system-packages-upgrade
+        break
+      ;;
+      [Nn]* )
+        break
+      ;;
+      * )
+        echo "Please answer yes or no."
+      ;;
+    esac
+  done
 
-install-git
-clone-installation-repository
-python-packages
-waveshare-driver
-install-pivsmp-program
-create-folders
+  install-git
+  clone-installation-repository
+  python-packages
+  waveshare-driver
+  install-pivsmp-program
+  create-folders
+}
 
 # Enable SPI
 # 
 # Explain the `pivsmp` command
+
+main
