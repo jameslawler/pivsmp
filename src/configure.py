@@ -23,7 +23,7 @@ if (not movies.checkMovieExists(defaultMovie)):
   defaultMovie = None
 
 answers = questionary.form(
-  display = questionary.select("Which e-paper display do you have?", choices=display.SUPPORTED_DISPLAYS, default=display.DEFAULT_DISPLAY),
+  display = questionary.select("Which e-paper display do you have?", choices=display.SUPPORTED_DISPLAYS, default=config.getDisplayConfig()),
   movie = questionary.select("Which movie do you want to show?", choices=movies.listMovies(), default=defaultMovie),
   position = questionary.text("Which frame number to show next?"),
   delay = questionary.select("How many seconds to wait between frames?", choices=["60", "120", "180", "240", "300"], default="120"),
