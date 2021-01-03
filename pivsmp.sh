@@ -2,9 +2,8 @@
 
 SCRIPT=$( basename "$0" )
 VERSION="1.0.0"
-PIVSMP_SOURCE_PATH="./src"
-PIVSMP_SCRIPT_CMD="python ./src/pivsmp.py"
-PIVSMP_SCRIPT_PROCESS_NAME="./src/pivsmp.py"
+PIVSMP_PROGRAM_PATH="/usr/local/pivsmp"
+PIVSMP_PROCESS_NAME="pivsmp.py"
 
 function usage
 {
@@ -42,7 +41,7 @@ function version
 
 function app-status
 {
-  local PIVSMP_PID=$(pgrep -f $PIVSMP_SCRIPT_PROCESS_NAME)
+  local PIVSMP_PID=$(pgrep -f $PIVSMP_PROCESS_NAME)
   local RASPI_CONFIG_SPI=$(raspi-config nonint get_spi)
 
   if [ -z "$PIVSMP_PID" ]
@@ -69,19 +68,19 @@ function app-status
   )
 
   printf "%s\n" "${txt[@]}"
-  python $PIVSMP_SOURCE_PATH/status.py
+  python $PIVSMP_PROGRAM_PATH/status.py
 }
 
 function app-configure
 {
-  python $PIVSMP_SOURCE_PATH/configure.py
+  python $PIVSMP_PROGRAM_PATH/configure.py
 }
 
 function app-start
 {
-  nohup $PIVSMP_SCRIPT_CMD > /dev/null &
+  nohup python $PIVSMP_PROGRAM_PATH/$PIVSMP_PROCESS_NAME > /dev/null &
 
-  local PIVSMP_PID=$(pgrep -f $PIVSMP_SCRIPT_PROCESS_NAME)
+  local PIVSMP_PID=$(pgrep -f $PIVSMP_PROCESS_NAME)
 
   if [ -z "$PIVSMP_PID" ]
   then
@@ -94,8 +93,8 @@ function app-start
 
 function app-stop
 {
-  pkill -f $PIVSMP_SCRIPT_PROCESS_NAME > /dev/null
-  local PIVSMP_PID=$(pgrep -f $PIVSMP_SCRIPT_PROCESS_NAME)
+  pkill -f $PIVSMP_PROCESS_NAME > /dev/null
+  local PIVSMP_PID=$(pgrep -f $PIVSMP_PROCESS_NAME)
 
   if [ -z "$PIVSMP_PID" ]
   then
@@ -115,14 +114,14 @@ function app-restart
 function app-clear
 {
   app-stop
-  python $PIVSMP_SOURCE_PATH/clear.py
+  python $PIVSMP_PROGRAM_PATH/clear.py
   echo "Display cleared"
 }
 
 function app-test
 {
   app-stop
-  python $PIVSMP_SOURCE_PATH/test.py
+  python $PIVSMP_PROGRAM_PATH/test.py
   echo "Check your display to see if there is a test message"
 }
 
