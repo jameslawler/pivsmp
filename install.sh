@@ -75,6 +75,20 @@ function create-folders
   echo "(complete)    creating folders (~/.pivsmp)"
 }
 
+function enable-spi
+{
+  local RASPI_CONFIG_SPI=$(raspi-config nonint get_spi)
+
+  echo "(starting)    enabling SPI"
+
+  if [ "$RASPI_CONFIG_SPI" == "1" ]
+  then
+    raspi-config nonint set_spi 0
+  fi
+
+  echo "(complete)    enabling SPI"
+}
+
 function main
 {
   while true; do
@@ -115,10 +129,16 @@ function main
   waveshare-driver
   install-pivsmp-program
   create-folders
-}
+  enable-spi
 
-# Enable SPI
-# 
-# Explain the `pivsmp` command
+  echo "------------------------"
+  echo " Installation Complete! "
+  echo "------------------------"
+  echo " Run `pivsmp configure` from your console to setup a movie."
+  echo " Or run `pivsmp` to see a list of commands to control the display."
+  echo ""
+  echo " Thank you for using PiVSMP."
+  echo ""
+}
 
 main "$@"
