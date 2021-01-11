@@ -3,14 +3,14 @@
 function system-packages-update
 {
   echo "(starting)    sudo apt-get update"
-  #sudo apt-get update
+  sudo apt-get update
   echo "(complete)    sudo apt-get update"
 }
 
 function system-packages-upgrade
 {
   echo "(starting)    sudo apt-get upgrade"
-  #sudo apt-get upgrade
+  sudo apt-get upgrade
   echo "(complete)    sudo apt-get upgrade"
 }
 
