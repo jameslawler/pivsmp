@@ -132,6 +132,9 @@ class JetsonNano:
         self.SPI.SYSFS_software_spi_begin()
         return 0
 
+    def module_sleep(self):
+        self.SPI.close()
+
     def module_exit(self):
         logging.debug("spi end")
         self.SPI.SYSFS_software_spi_end()
