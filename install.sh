@@ -46,6 +46,10 @@ function python-packages
   echo "(starting)    sudo pip3 install --no-cache-dir questionary"
   sudo pip3 install --no-cache-dir questionary
   echo "(complete)    sudo pip3 install --no-cache-dir questionary"
+
+  echo "(starting)    sudo pip3 install --no-cache-dir ffmpeg-python"
+  sudo pip3 install --no-cache-dir ffmpeg-python
+  echo "(complete)    sudo pip3 install --no-cache-dir ffmpeg-python"
 }
 
 function waveshare-driver
