@@ -12,26 +12,29 @@ from PIL import Image
 import ffmpeg
 
 import movies
+import display
 
 def getFrameFromVideo(movieFolder, position):
-  movieFilePath = movieFolder + "/" + "movie.mp4"
-  imageFilePath = movieFolder + "/" + "frame.bmp"
+  width = display.getWidth()
+  height = display.getHeight()
+  movieFilePath = movies.getMoviePath(movie) + "/" + "movie.mp4"
+  imageFilePath = movies.getMoviePath(movie) + "/" + "frame.bmp"
 
   time = "%dms"%(position*41.666666)
 
   try:
-      ffmpeg
-        .input(movieFilePath, ss=time)
-        .filter("scale", "iw*sar", "ih")
-        .filter("scale", width, height, force_original_aspect_ratio=1)
-        .filter("pad", width, height, -1, -1)
-        .output(imageFilePath, vframes=1)
-        .overwrite_output()
-        .run(capture_stdout=True, capture_stderr=True)
-    except ffmpeg.Error as e:
-        print('stdout:', e.stdout.decode('utf8'))
-        print('stderr:', e.stderr.decode('utf8'))
-        raise e
+    ffmpeg \
+    .input(movieFilePath, ss=time) \
+    .filter("scale", "iw*sar", "ih") \
+    .filter("scale", width, height, force_original_aspect_ratio=1) \
+    .filter("pad", width, height, -1, -1) \
+    .output(imageFilePath, vframes=1) \
+    .overwrite_output() \
+    .run(capture_stdout=True, capture_stderr=True)
+  except ffmpeg.Error as e:
+    print('stdout:', e.stdout.decode('utf8'))
+    print('stderr:', e.stderr.decode('utf8'))
+    raise e
 
   return imageFilePath
 
@@ -51,7 +54,7 @@ def getFrameImage(movie, position):
 
   if not os.path.exists(movieFilePath):
     imageFilePath = getFrameFromImage(movie, position)
-  else
+  else:
     imageFilePath = getFrameFromVideo(movie, position)
 
   image = Image.open(imageFilePath)
