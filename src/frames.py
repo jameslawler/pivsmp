@@ -14,13 +14,13 @@ import ffmpeg
 import movies
 import display
 
-def getFrameFromVideo(movieFolder, position):
+def getFrameFromVideo(movie, position):
   width = display.getWidth()
   height = display.getHeight()
   movieFilePath = movies.getMoviePath(movie) + "/" + "movie.mp4"
   imageFilePath = movies.getMoviePath(movie) + "/" + "frame.bmp"
 
-  time = "%dms"%(position*41.666666)
+  time = "%dms"%(float(position)*41.666666)
 
   try:
     ffmpeg \
